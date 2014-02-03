@@ -17,6 +17,16 @@ endif
 CPP             := cpp -P -traditional-cpp $(CPP_PAUSE)
 
 #-------------------------------------------------------------------------------
+# `All' rules.
+
+all : pdf hs
+
+pdf : $(addsuffix .pdf, $(basename $(wildcard *.lhs)))   \
+      $(addsuffix .pdf, $(basename $(wildcard *.lagda)))
+
+hs : $(addsuffix .hs, $(basename $(wildcard *.lhs)))
+
+#-------------------------------------------------------------------------------
 # File rules
 
 $(FORMAT) : $(FORMAT).hs

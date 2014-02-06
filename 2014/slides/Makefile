@@ -3,7 +3,7 @@
 # Commands and programs
 
 LHS2TEX         := lhs2TeX
-LATEXMK		:= latexmk
+LATEXMK         := latexmk
 GHC             := ghc
 FORMAT          := format
 
@@ -14,7 +14,17 @@ else
 CPP_PAUSE       := -UDO_PAUSES
 endif
 
-CPP             := cpp -P $(CPP_PAUSE)
+CPP             := cpp -P -traditional-cpp $(CPP_PAUSE)
+
+#-------------------------------------------------------------------------------
+# `All' rules.
+
+all : pdf hs
+
+pdf : $(addsuffix .pdf, $(basename $(wildcard *.lhs)))   \
+      $(addsuffix .pdf, $(basename $(wildcard *.lagda)))
+
+hs : $(addsuffix .hs, $(basename $(wildcard *.lhs)))
 
 #-------------------------------------------------------------------------------
 # File rules
